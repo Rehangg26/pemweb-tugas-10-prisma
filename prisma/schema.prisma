@@ -11,4 +11,3 @@ model Product {
   name  String  @db.VarChar(100)
   price Decimal @db.Decimal(12, 2)
 }
-

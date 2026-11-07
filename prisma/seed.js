@@ -15,4 +15,3 @@ seed().catch(() => {
   console.error('Seed gagal. Periksa koneksi dan migration database.');
   process.exitCode = 1;
 }).finally(() => prisma.$disconnect());
-

@@ -6,4 +6,3 @@ CREATE TABLE "Product" (
     CONSTRAINT "Product_name_not_blank" CHECK (length(trim("name")) > 0),
     CONSTRAINT "Product_price_nonnegative" CHECK ("price" >= 0)
 );
-
