@@ -50,4 +50,16 @@ async function createProduct(req, res) {
   return res.status(201).json(toProduct(product));
 }
 
-module.exports = { getProducts, getProductById, createProduct };
+async function updateProduct(req, res) {
+  const id = req.body?.id;
+  if (typeof id !== 'number' || parseId(id) === null) {
+    return res.status(400).json({ message: 'ID pada body harus berupa angka bulat positif hingga 2147483647' });
+  }
+  const message = validateProduct(req.body);
+  if (message) return res.status(400).json({ message });
+  const { name, price } = req.body;
+  const product = await prisma.product.update({ where: { id }, data: { name: name.trim(), price } });
+  return res.status(200).json(toProduct(product));
+}
+
+module.exports = { getProducts, getProductById, createProduct, updateProduct };
