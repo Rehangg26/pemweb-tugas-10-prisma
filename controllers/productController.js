@@ -19,7 +19,7 @@ function validateProduct(body) {
   if (typeof price !== 'number' || !Number.isFinite(price) || price < 0 || price > 9999999999.99) {
     return 'Harga harus berupa angka antara 0 dan 9999999999.99';
   }
-  if (Math.abs(price * 100 - Math.round(price * 100)) > 0.0001) {
+  if (Number(price.toFixed(2)) !== price) {
     return 'Harga maksimal memiliki 2 angka di belakang koma';
   }
   return null;

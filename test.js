@@ -87,7 +87,7 @@ test('CRUD PostgreSQL dan persistence', async (t) => {
     undefined, null, [], {}, { name: '   ', price: 10 }, { name: 12, price: 10 },
     { name: 'a'.repeat(101), price: 10 }, { name: 'Uji', price: '100' },
     { name: 'Uji', price: -1 }, { name: 'Uji', price: 1.234 },
-    { name: 'Uji', price: 10000000000 },
+    { name: 'Uji', price: 10000000000 }, { name: 'Uji', price: 0.00000001 },
   ];
   for (const [index, body] of invalidBodies.entries()) {
     await t.test(`POST input tidak valid ${index + 1}: 400 tanpa perubahan DB`, async () => {
@@ -102,6 +102,12 @@ test('CRUD PostgreSQL dan persistence', async (t) => {
     const row = await prisma.product.findUnique({ where: { id: product.id } });
     assert.equal(row.name, product.name);
     assert.equal(Number(row.price), 0);
+  });
+  await t.test('Harga batas maksimum tetap presisi', async () => {
+    const result = await request('PUT', '/products', { ...product, price: 9999999999.99 });
+    assert.equal(result.status, 200);
+    assert.equal(result.body.price, 9999999999.99);
+    assert.equal((await request('PUT', '/products', product)).status, 200);
   });
   for (const id of [undefined, '1', 0, -1, 1.5, 2147483648]) {
     await t.test(`PUT id tidak valid ${String(id)}: 400`, async () => {
