@@ -1,0 +1,52 @@
+
+> expressjs-api-produk@1.0.0 test
+> node --test test.js
+
+▶ CRUD PostgreSQL dan persistence
+  ✔ GET daftar produk: 200 dan array (127.4443ms)
+  ✔ POST valid: 201, trim nama, harga angka (133.4594ms)
+  ✔ GET detail dan daftar memuat hasil POST (9.317ms)
+  ✔ Restart proses Express mempertahankan produk (456.2446ms)
+  ✔ POST input tidak valid 1: 400 tanpa perubahan DB (7.2391ms)
+  ✔ POST input tidak valid 2: 400 tanpa perubahan DB (14.4875ms)
+  ✔ POST input tidak valid 3: 400 tanpa perubahan DB (3.1797ms)
+  ✔ POST input tidak valid 4: 400 tanpa perubahan DB (3.2763ms)
+  ✔ POST input tidak valid 5: 400 tanpa perubahan DB (3.5454ms)
+  ✔ POST input tidak valid 6: 400 tanpa perubahan DB (2.9405ms)
+  ✔ POST input tidak valid 7: 400 tanpa perubahan DB (3.0236ms)
+  ✔ POST input tidak valid 8: 400 tanpa perubahan DB (2.6253ms)
+  ✔ POST input tidak valid 9: 400 tanpa perubahan DB (2.5272ms)
+  ✔ POST input tidak valid 10: 400 tanpa perubahan DB (2.9733ms)
+  ✔ POST input tidak valid 11: 400 tanpa perubahan DB (2.7679ms)
+  ✔ POST input tidak valid 12: 400 tanpa perubahan DB (3.6772ms)
+  ✔ PUT valid: 200 dan database berubah (11.6004ms)
+  ✔ Harga batas maksimum tetap presisi (7.8369ms)
+  ✔ PUT id tidak valid undefined: 400 (1.0587ms)
+  ✔ PUT id tidak valid 1: 400 (0.9693ms)
+  ✔ PUT id tidak valid 0: 400 (0.9815ms)
+  ✔ PUT id tidak valid -1: 400 (0.9429ms)
+  ✔ PUT id tidak valid 1.5: 400 (1.3415ms)
+  ✔ PUT id tidak valid 2147483648: 400 (1.2859ms)
+  ✔ PUT harga tidak valid: 400 dan produk tetap (3.3205ms)
+  ✔ GET produk tidak ditemukan: 404 (1.8828ms)
+  ✔ PUT produk tidak ditemukan: 404 (5.6214ms)
+  ✔ DELETE produk tidak ditemukan: 404 (3.8664ms)
+  ✔ GET/DELETE id tidak valid abc: 400 (1.3166ms)
+  ✔ GET/DELETE id tidak valid 0: 400 (1.1427ms)
+  ✔ GET/DELETE id tidak valid -1: 400 (2.4887ms)
+  ✔ GET/DELETE id tidak valid 1.5: 400 (1.4983ms)
+  ✔ GET/DELETE id tidak valid 2147483648: 400 (1.2938ms)
+  ✔ GET/DELETE id tidak valid 1e2: 400 (1.269ms)
+  ✔ JSON rusak: 400 JSON (1.3599ms)
+  ✔ DELETE valid: 200, baris hilang, GET selanjutnya 404 (4.4882ms)
+  ✔ DELETE berulang: 404 (2.5169ms)
+  ✔ Endpoint tidak ada: 404 JSON (0.9159ms)
+✔ CRUD PostgreSQL dan persistence (1115.672ms)
+ℹ tests 39
+ℹ suites 0
+ℹ pass 39
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4096.5817
