@@ -11,10 +11,19 @@ function parseId(value) {
   return Number.isInteger(id) && id <= 2147483647 ? id : null;
 }
 
-let products = [
-  { id: 1, name: 'Buku', price: 15000 },
-  { id: 2, name: 'Pulpen', price: 5000 },
-];
+function validateProduct(body) {
+  const { name, price } = body || {};
+  if (typeof name !== 'string' || !name.trim() || name.trim().length > 100) {
+    return 'Nama produk harus berupa teks, tidak kosong, dan maksimal 100 karakter';
+  }
+  if (typeof price !== 'number' || !Number.isFinite(price) || price < 0 || price > 9999999999.99) {
+    return 'Harga harus berupa angka antara 0 dan 9999999999.99';
+  }
+  if (Math.abs(price * 100 - Math.round(price * 100)) > 0.0001) {
+    return 'Harga maksimal memiliki 2 angka di belakang koma';
+  }
+  return null;
+}
 
 async function getProducts(req, res) {
   const products = await prisma.product.findMany({ orderBy: { id: 'asc' } });
@@ -33,20 +42,12 @@ async function getProductById(req, res) {
   return res.status(200).json(toProduct(product));
 }
 
-function createProduct(req, res) {
-  const { name, price } = req.body || {};
-
-  if (typeof name !== 'string' || name.trim() === '' || typeof price !== 'number' || !Number.isFinite(price)) {
-    return res.status(400).json({
-      message: 'Nama produk harus berupa teks dan harga harus berupa angka',
-    });
-  }
-
-  const id = products.reduce((largest, product) => Math.max(largest, product.id), 0) + 1;
-  const newProduct = { id, name: name.trim(), price };
-
-  products.push(newProduct);
-  return res.status(201).json(newProduct);
+async function createProduct(req, res) {
+  const message = validateProduct(req.body);
+  if (message) return res.status(400).json({ message });
+  const { name, price } = req.body;
+  const product = await prisma.product.create({ data: { name: name.trim(), price } });
+  return res.status(201).json(toProduct(product));
 }
 
 module.exports = { getProducts, getProductById, createProduct };
