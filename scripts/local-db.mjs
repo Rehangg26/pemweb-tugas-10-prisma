@@ -11,8 +11,8 @@ const database = new EmbeddedPostgres({
   persistent: true,
   authMethod: 'scram-sha-256',
   postgresFlags: ['-h', '127.0.0.1'],
-  onLog: () => {},
-  onError: () => {},
+  onLog: (message) => { if (process.env.DEBUG_DB) console.log(message); },
+  onError: (message) => console.error(String(message)),
 });
 
 try {
@@ -32,7 +32,7 @@ try {
   console.log('PostgreSQL latihan siap di 127.0.0.1:54329. Data disimpan di .postgres/.');
   console.log('Gunakan terminal lain untuk migration dan API. Ctrl+C untuk berhenti.');
 } catch (error) {
-  console.error('PostgreSQL lokal gagal:', error.message);
+  console.error('PostgreSQL lokal gagal:', error?.message || String(error));
   process.exitCode = 1;
   await database.stop().catch(() => {});
 }
