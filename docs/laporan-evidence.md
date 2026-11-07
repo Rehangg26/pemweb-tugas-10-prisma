@@ -1,8 +1,11 @@
 # Laporan Evidence - Pemrograman Web Minggu 10
 
-Nama: Reyhan Adi Satrio  
-NRP: 5027251080  
-Tanggal pengujian: 7 November 2026  
+Nama: Reyhan Adi Satrio
+
+NRP: 5027251080
+
+Tanggal pengujian: 7 November 2026
+
 Repository: [pemweb-tugas-10-prisma](https://github.com/Rehangg26/pemweb-tugas-10-prisma)
 
 API produk minggu ke-9 dilanjutkan dengan Prisma 7 dan PostgreSQL. GET dan POST memakai database; PUT dan DELETE ditambahkan. PUT menggunakan `id`, `name`, dan `price` di body. ID dibuat otomatis oleh PostgreSQL.
