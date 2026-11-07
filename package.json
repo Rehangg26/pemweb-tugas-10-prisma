@@ -1,0 +1,14 @@
+{
+  "name": "expressjs-api-produk",
+  "version": "1.0.0",
+  "description": "API daftar produk dengan Express.js untuk tugas Pemrograman Web",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node --test test.js"
+  },
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.3.0"
+  }
+}
